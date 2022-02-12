@@ -1,8 +1,14 @@
 ---
 layout: post
+<<<<<<< HEAD:_posts/vax_proj.md
 title: Anti-vaccine Sentiments and Conspiracy on Twitter 
 subtitle: Astroturfing and slippery slopes
 gh-repo: BenLewis42/BenLewis42.github.io
+=======
+title: Sample blog post
+subtitle: Each post also has a subtitle
+gh-repo: daattali/beautiful-jekyll
+>>>>>>> parent of 7522c53 (vax post p1):_posts/2020-02-28-test-markdown.md
 gh-badge: [star, fork, follow]
 tags: [test]
 comments: true
@@ -59,20 +65,20 @@ var foo = function(x) {
 foo(3)
 {% endhighlight %}
 
-# ## Boxes
-# You can add notification, warning and error boxes like this:
-# 
-# ### Notification
-# 
-# {: .box-note}
-# **Note:** This is a notification box.
-# 
-# ### Warning
-# 
-# {: .box-warning}
-# **Warning:** This is a warning box.
-# 
-# ### Error
-# 
-# {: .box-error}
-# **Error:** This is an error box.
+## Boxes
+You can add notification, warning and error boxes like this:
+
+### Notification
+
+{: .box-note}
+**Note:** This is a notification box.
+
+### Warning
+
+{: .box-warning}
+**Warning:** This is a warning box.
+
+### Error
+
+{: .box-error}
+**Error:** This is an error box.
