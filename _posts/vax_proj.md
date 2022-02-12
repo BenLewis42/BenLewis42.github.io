@@ -2,7 +2,7 @@
 layout: post
 title: Anti-vaccine Sentiments and Conspiracy on Twitter 
 subtitle: Astroturfing and slippery slopes
-gh-repo: daattali/beautiful-jekyll
+gh-repo: BenLewis42/BenLewis42.github.io
 gh-badge: [star, fork, follow]
 tags: [test]
 comments: true
