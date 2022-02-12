@@ -6,6 +6,9 @@ subtitle: Astroturfing and slippery slopes
 #thumbnail-img: /assets/img/earth_vax2.jpg
 share-img: /assets/img/vaccine.jpg
 tags: [books, test]
+output:
+  html_document:
+    keep_md: true
 ---
 
 ```{r setup, include=FALSE}
