@@ -1,0 +1,99 @@
+---
+title: "vax_rmd"
+output: md_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, include = TRUE, eval = TRUE, message = FALSE, warning = FALSE)
+```
+
+
+```{r}
+setwd("~/GitHub/Vax-Proj")
+
+library(tidyverse)
+library(stringr)
+library(patchwork)
+library(shiny)
+library(knitr)
+library(kableExtra)
+
+
+data <- read.csv('data/covidvaccine.csv')
+
+anti_vax_tags <- c('plandemic', 'scamdemic', 'wakeup', 'covid1984', 'covidhoax', 'nomasks', '#nomask', 'COVIDVaccineInjuries')
+
+
+filtered <- data %>%
+  mutate(anti_vax = ifelse(grepl(anti_vax_tags[1], hashtags, ignore.case = TRUE) |
+                             grepl(anti_vax_tags[2], hashtags, ignore.case = TRUE) |
+                             grepl(anti_vax_tags[3], hashtags, ignore.case = TRUE) |
+                             grepl(anti_vax_tags[4], hashtags, ignore.case = TRUE) |
+                             grepl(anti_vax_tags[5], hashtags, ignore.case = TRUE) |
+                             grepl(anti_vax_tags[6], hashtags, ignore.case = TRUE) |
+                             grepl(anti_vax_tags[6], hashtags, ignore.case = TRUE) |
+                             grepl(anti_vax_tags[7], hashtags, ignore.case = TRUE), 
+                           1, 0))
+
+
+check_tag = c('autism', 'eugenics', 'PuppetState', 'nwo', 'Great Reset', 'wakeup')
+
+
+shear_age <- filtered[8113:nrow(filtered),]
+
+
+filter_age <- shear_age %>% 
+  mutate(format_date = as.Date(date, format= "%Y-%m-%d")) %>% 
+  mutate(format_created = as.Date(user_created, format= "%Y-%m-%d")) %>% 
+  mutate(acc_age = as.numeric(difftime(as.Date(format_date), as.Date(format_created), units = 'days'))) %>% 
+  select(acc_age, anti_vax)
+
+
+specify_decimal <- function(x, k) {
+  trimws(format(round(x, k), nsmall=k))
+  
+} 
+
+
+
+
+    
+  
+age_plot <- ggplot(filter_age, aes(y = acc_age, x = as.factor(anti_vax), color = as.factor(anti_vax))) +
+  geom_boxplot() + 
+  stat_summary(fun = "quantile",
+               geom = "text",
+               aes(label = trimws(format(round(as.numeric(sprintf("%1.1f", ..y..)), 0), nsmall = 0))),
+               position = position_nudge(x = 0.2, y = 125),
+               color = "black") +
+  scale_y_discrete(name = "Account Age (Days)", labels = NULL, expand = expansion(mult = c(0, 0.02))) +
+  scale_color_manual(name = "", values = c("black", "red"), labels = c("All #CovidVaccine Tweets", "Anti-vax Tweets")) + 
+  scale_x_discrete(name = NULL, labels = NULL)
+  
+plot(age_plot)
+
+  
+conspiracy_data <- shear_age %>% 
+  mutate(conspiracy = ifelse(grepl(check_tag[1], hashtags, ignore.case = TRUE) | 
+       grepl(check_tag[2], hashtags, ignore.case = TRUE) |
+       grepl(check_tag[3], hashtags, ignore.case = TRUE) |
+       grepl(check_tag[4], hashtags, ignore.case = TRUE) |
+       grepl(check_tag[5], hashtags, ignore.case = TRUE), 1, 0))
+
+cons_group <- conspiracy_data %>% 
+  group_by(anti_vax) %>% 
+  summarise(mean = mean(conspiracy)) %>% 
+  select(mean)
+
+
+cons_group$mean = round(cons_group$mean, digit = 4)
+
+row.names(cons_group) <- c("All #CovidVaccine Tweets", "Anti-vax Tweets")
+
+
+kable(cons_group, caption = c('Proportion of Tweets with Conspiracy Hashtags'), col.names = NULL) %>% 
+  #kable_material(c("striped", "hover"))
+  kable_classic(full_width = F, html_font = "Cambria")
+
+
+```
