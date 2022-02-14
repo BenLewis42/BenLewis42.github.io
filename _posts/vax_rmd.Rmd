@@ -1,6 +1,7 @@
 ---
 title: "vax_rmd"
 output: md_document
+always_allow_html: true
 ---
 
 ```{r setup, include=FALSE}
@@ -84,7 +85,7 @@ cons_group <- conspiracy_data %>%
   select(mean)
 
 
-cons_group$mean = round(cons_group$mean, digit = 4)
+cons_group$mean = round(cons_group$mean, digit = 3)
 
 row.names(cons_group) <- c("All #CovidVaccine Tweets", "Anti-vax Tweets")
 
@@ -119,4 +120,4 @@ kable(cons_group, caption = c('Proportion of Tweets with Conspiracy Hashtags'), 
 
 ```
 
-The COVID-19 pandemic brought unprecedented social upheaval with it. Early months were fraught with confusion and misinformation, including misleading and even outwardly deceptive statements by the Trump administration, and our former president himself. In the last decade, conspiratorial ideas have been brought to the forefront of American politics, and the fears and difficulties of the pandemic only fueled this paranoia. Because of this, I again looked at these anti-vaccine tweets, and found that anti-vaccine ideas, recently espoused by cultural giants like Nicki Minaj, Kanye West, and most recently Joe Rogan, are strongly linked to other, even more dangerous ideas. Only 0.1%, or 1 in one thousand #CovidVaccine tweets contain conspiracy hashtags like #Eugenics and #PuppetState. However, anti-vax tweets contain these hashtags nearly 4% of the time, an increase of 3760%.  
+The COVID-19 pandemic brought unprecedented social upheaval with it. Early months were fraught with confusion and misinformation, including misleading and even outwardly deceptive statements by the Trump administration, and our former president himself. In the last decade, conspiratorial ideas have been brought to the forefront of American politics, and the fears and difficulties of the pandemic only fueled this paranoia. Because of this, I again looked at these anti-vaccine tweets, and found that anti-vaccine ideas, recently espoused by cultural giants like Nicki Minaj, Kanye West, and most recently Joe Rogan, are strongly linked to other, even more dangerous ideas. Only 0.1%, or 1 in one thousand #CovidVaccine tweets contain conspiracy hashtags like #Eugenics and #PuppetState. However, anti-vax tweets contain these hashtags nearly 4% of the time, an increase of 3760%. Although not necessarily surprising, it's important to acknowledge the potential anti-vax ideas have to introduce and normalize more harmful and dangerous worldviews.
