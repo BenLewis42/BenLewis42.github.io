@@ -28,6 +28,11 @@
         </h1>
     </div>
 
+    <!-- Blog feed -->
+    <main id="feed" class="feed" aria-live="polite">
+        <!-- Posts will be loaded here by JavaScript from /posts/index.json -->
+    </main>
+
     <div class="fun">
         <!-- Removed broken images -->
     </div>
@@ -36,15 +41,8 @@
         <ul>
             <li><a href="index.html">Enter</a></li>
             <li><a href="home.html">Home</a></li>
-            <li><a href="action.html">Action</a></li>
-            <li><a href="comedy.html">Comedy</a></li>
-            <li><a href="fantasy.html">Fantasy</a></li>
-            <li><a href="horror.html">Horror</a></li>
-            <li><a href="mystery.html">Mystery</a></li>
-            <li><a href="romance.html">Romance</a></li>
-            <li><a href="western.html">Western</a></li>
-            <h1>Sound warning<br>Click to play</h1>
-            <!-- Removed missing GIF reference -->
+            <li><a href="home.html#feed">Posts</a></li>
+            <li><a href="#about">About</a></li>
         </ul>
     </nav>
 
@@ -57,5 +55,35 @@
         <source src="songs/home.mp3" type="audio/ogg">
         Your browser does not support the audio element.
     </audio>
+
+    <script>
+    async function loadFeed(){
+        try{
+            const res = await fetch('posts/index.json');
+            if(!res.ok) throw new Error('Could not load posts index');
+            const posts = await res.json();
+            const container = document.getElementById('feed');
+            // sort newest first
+            posts.sort((a,b)=> new Date(b.date) - new Date(a.date));
+            posts.forEach(p=>{
+                const card = document.createElement('article');
+                card.className = 'post-card';
+                card.innerHTML = `
+                    <a class="thumb-link" href="${p.url}"><img class="thumb" src="${p.thumb}" alt="${p.title}"></a>
+                    <div class="post-body">
+                      <h2 class="post-title"><a href="${p.url}">${p.title}</a></h2>
+                      <p class="post-meta">${new Date(p.date).toLocaleDateString()}</p>
+                      <p class="post-excerpt">${p.excerpt}</p>
+                    </div>`;
+                container.appendChild(card);
+            });
+        }catch(err){
+            console.error(err);
+            const container = document.getElementById('feed');
+            container.innerHTML = '<p>Sorry, the post feed could not be loaded.</p>';
+        }
+    }
+    loadFeed();
+    </script>
 </body>
 </html>

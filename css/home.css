@@ -180,3 +180,36 @@ audio#music {
     width: 100px;
     
 }
+
+/* Blog feed styles */
+.feed {
+    margin-left: 260px; /* account for left nav */
+    padding: 2rem;
+    max-width: 980px;
+}
+.post-card {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 1.25rem;
+    background: rgba(255,255,255,0.85);
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+.post-card .thumb {
+    width: 160px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+.post-body { flex: 1; }
+.post-title { margin: 0 0 0.25rem 0; font-size: 1.35rem; }
+.post-title a { color: #1a1a1a; text-decoration: none; }
+.post-meta { color: #666; font-size: 0.9rem; margin: 0 0 0.5rem 0; }
+.post-excerpt { margin: 0; color: #222; }
+
+@media (max-width: 800px) {
+    .feed { margin-left: 20px; padding: 1rem; }
+    .post-card { flex-direction: column; }
+    .post-card .thumb { width: 100%; height: 180px; }
+}

@@ -1,0 +1,16 @@
+[
+  {
+    "title": "Sample: A New Home for Reviews",
+    "url": "posts/2025-12-08-sample-post.html",
+    "date": "2025-12-08",
+    "thumb": "images/jumanji-main.jpg",
+    "excerpt": "Introducing the new posts-as-pages system — each post is a standalone HTML page with media."
+  },
+  {
+    "title": "Retro: Favorite 90s Blockbusters",
+    "url": "posts/2024-01-01-retro-movies.html",
+    "date": "2024-01-01",
+    "thumb": "images/army-of-darkness.jpg",
+    "excerpt": "A look back at the films that defined a decade — synopses, images, and listening recommendations."
+  }
+]
