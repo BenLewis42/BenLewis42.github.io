@@ -3,58 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fresh Tomatoes</title>
+    <title>Fresh Tomatoes — Blog</title>
     <link rel="stylesheet" href="css/home.css">
 </head>
 <body>
-    <section class="container">
-        <h1 class="glow">Welcome to fresh tomatoes</h1>
-    </section>
+    <header class="site-header">
+        <div class="header-content">
+            <h1><a href="home.html">Fresh Tomatoes</a></h1>
+            <p class="tagline">A collection of thoughts and reviews</p>
+        </div>
+    </header>
 
-    <div class="visitor">
-        <!-- hitwebcounter Code START -->
-        <h1>Thank you so much for visiting us. You are the visitor number: 
-            <img src="https://hitwebcounter.com/counter/counter.php?page=7662630&style=0009&nbdigits=5&type=page&initCount=0" 
-                 title="Total Website Hits" alt="Web Hits" border="0" />
-        </h1>
-    </div>
-
-    <div class="about">
-        <h1>
-            <center>You are on Fresh Tomatoes!</center>
-            Here you can find reviews of most popular movies from the 90's. This website was created with you and your leisure in mind. 
-            Choose the type of movie that you like best and find out which one is worth watching. After that, just take the popcorn and 
-            put the chosen film into action.
-        </h1>
-    </div>
-
-    <!-- Blog feed -->
-    <main id="feed" class="feed" aria-live="polite">
-        <!-- Posts will be loaded here by JavaScript from /posts/index.json -->
-    </main>
-
-    <div class="fun">
-        <!-- Removed broken images -->
-    </div>
-
-    <nav id="menu"> 
+    <nav class="site-nav">
         <ul>
-            <li><a href="index.html">Enter</a></li>
             <li><a href="home.html">Home</a></li>
-            <li><a href="home.html#feed">Posts</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#feed">Posts</a></li>
+            <li><a href="index.html">Enter (Legacy)</a></li>
         </ul>
     </nav>
 
-    <div class="audio">
-        <h1>Sound warning</h1>
-    </div>    
-    
-    <audio id="music" controls="controls">
-        <source src="songs/home.mp3" type="audio/mpeg">
-        <source src="songs/home.mp3" type="audio/ogg">
-        Your browser does not support the audio element.
-    </audio>
+    <main id="feed" class="feed" aria-live="polite">
+        <!-- Posts will be loaded here by JavaScript from /posts/index.json -->
+        <p class="loading">Loading posts...</p>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 Fresh Tomatoes. All rights reserved.</p>
+    </footer>
 
     <script>
     async function loadFeed(){
