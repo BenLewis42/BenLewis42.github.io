@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin — Write posts</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>label{display:block;margin:.5rem 0}input[type=text],input[type=date],textarea{width:100%;padding:.5rem}#status{margin-top:1rem}</style>
+</head>
+<body>
+  <main style="max-width:840px;margin:2rem auto;">
+    <h1>Site Admin — Create Post & Upload Media</h1>
+
+    <section>
+      <h2>Repository Settings</h2>
+      <label>GitHub Owner (username or org)
+        <input id="owner" type="text" placeholder="USERNAME">
+      </label>
+      <label>Repository
+        <input id="repo" type="text" placeholder="REPO_NAME">
+      </label>
+      <label>Branch
+        <input id="branch" type="text" value="main">
+      </label>
+      <label>Personal Access Token (PAT)
+        <input id="token" type="password" placeholder="ghp_xxx" autocomplete="off">
+      </label>
+    </section>
+
+    <section>
+      <h2>New Post</h2>
+      <label>Title
+        <input id="title" type="text" placeholder="My new post">
+      </label>
+      <label>Date
+        <input id="date" type="date">
+      </label>
+      <label>Slug (optional)
+        <input id="slug" type="text" placeholder="my-new-post">
+      </label>
+      <label>Content (Markdown)
+        <textarea id="content" rows="12" placeholder="Write your post in Markdown..."></textarea>
+      </label>
+      <label>Images (will be uploaded to `images/`)
+        <input id="images" type="file" multiple accept="image/*">
+      </label>
+
+      <div style="margin-top:.5rem">
+        <button id="publish">Publish to GitHub</button>
+        <button id="saveDraft">Save draft (local)</button>
+      </div>
+      <div id="status"></div>
+    </section>
+  </main>
+
+  <script src="js/admin.js"></script>
+</body>
+</html>

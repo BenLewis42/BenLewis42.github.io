@@ -1,11 +1,22 @@
 # BenLewis42.github.io
 
-This repository has been reset to a minimal blank GitHub Pages template (static `index.html`).
+This repository now contains a minimal blog with an in-site admin that can publish posts and upload media directly to this repository using the GitHub API.
 
-If you want the repository cleaned (delete existing `posts/`, `images/`, `Gifs/`, and the Jekyll files), run the included PowerShell script `cleanup.ps1` from the repository root:
+Quick start
+- Edit `config.json` and set `owner` and `repo` to your GitHub account and repository name.
+- Open `admin.html` in the browser. Provide:
+	- your GitHub owner and repository
+	- the branch to commit to (usually `main`)
+	- a GitHub Personal Access Token (PAT) with `repo` permissions (for public repo, `public_repo` is sufficient)
 
-```powershell
-.\cleanup.ps1
-```
+Publishing posts
+- In `admin.html` fill the post title, date (defaults to today), slug (optional), content (Markdown), and choose images to upload. Click `Publish to GitHub`.
+- The admin will upload images to `images/` and create a Markdown file under `_posts/YYYY-MM-DD-slug.md` with YAML front matter.
 
-After running the script, review the changes and commit them. If you prefer I run the cleanup here for you, tell me and I will proceed.
+Home feed
+- `index.html` uses `config.json` and the GitHub API to list and link posts from `_posts/`.
+
+Security
+- The PAT is required to commit files to the repository. Keep it private. The admin page does not store the token permanently (except if you store it in browser autofill). Use a token with minimal scopes.
+
+If you want me to enable automatic cleanup (delete `posts/`, `images/`, `Gifs/`) here, confirm and I will proceed.
