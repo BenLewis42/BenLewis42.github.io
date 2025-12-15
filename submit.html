@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Submit a Post</title>
   <link rel="stylesheet" href="css/style.css">
-  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="https://www.google.com/recaptcha/api.js?render=6LcphiwsAAAAACGlnm1L-tmlPNRZQ3EEkINbAB1P"></script>
+  <style>label{display:block;margin:.5rem 0;font-weight:bold}input[type=text],textarea,input[type=file]{width:100%;padding:.5rem;margin:.25rem 0;border:1px solid #ccc;border-radius:4px}button{padding:.5rem 1rem;background:#007bff;color:white;border:none;border-radius:4px;cursor:pointer}button:hover{background:#0056b3}#status{margin-top:1rem}</style>
 </head>
 <body>
   <main style="max-width:720px;margin:3rem auto;text-align:left;font-family:Arial,Helvetica,sans-serif;">
@@ -16,7 +17,6 @@
       <label>Post Title: <input type="text" name="title" required></label>
       <label>Content (Markdown): <textarea name="content" rows="8" required></textarea></label>
       <label>Images: <input type="file" name="images" multiple accept="image/*"></label>
-      <div class="g-recaptcha" data-sitekey="6LcphiwsAAAAACGlnm1L-tmlPNRZQ3EEkINbAB1P"></div>
       <button type="submit">Submit Post</button>
     </form>
 
@@ -26,7 +26,9 @@
   <script>
     document.getElementById('submitForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+      const token = await grecaptcha.execute('6LcphiwsAAAAACGlnm1L-tmlPNRZQ3EEkINbAB1P', { action: 'submit' });
       const formData = new FormData(e.target);
+      formData.append('g-recaptcha-response', token);
       const response = await fetch('/api/submit', { method: 'POST', body: formData });
       const result = await response.text();
       document.getElementById('status').innerText = result;
