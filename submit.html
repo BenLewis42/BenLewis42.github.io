@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Submit a Post</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+  <main style="max-width:720px;margin:3rem auto;text-align:left;font-family:Arial,Helvetica,sans-serif;">
+    <h1>Submit a Post</h1>
+    <p>Fill out the form below. Your post will be published automatically after submission.</p>
+
+    <form id="submitForm" action="/api/submit" method="POST">
+      <label>Name: <input type="text" name="name" required></label>
+      <label>Email: <input type="email" name="email" required></label>
+      <label>Post Title: <input type="text" name="title" required></label>
+      <label>Content (Markdown): <textarea name="content" rows="8" required></textarea></label>
+      <label>Images: <input type="file" name="images" multiple accept="image/*"></label>
+      <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+      <button type="submit">Submit Post</button>
+    </form>
+
+    <div id="status"></div>
+  </main>
+
+  <script>
+    document.getElementById('submitForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      const response = await fetch('/api/submit', { method: 'POST', body: formData });
+      const result = await response.text();
+      document.getElementById('status').innerText = result;
+    });
+  </script>
+</body>
+</html>

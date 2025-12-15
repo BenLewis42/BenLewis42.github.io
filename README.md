@@ -19,4 +19,20 @@ Home feed
 Security
 - The PAT is required to commit files to the repository. Keep it private. The admin page does not store the token permanently (except if you store it in browser autofill). Use a token with minimal scopes.
 
+## Vercel Setup for Auto-Approval Submissions
+To enable auto-approval of user-submitted posts (for private sites only):
+
+1. **Sign up for Vercel**: Go to [vercel.com](https://vercel.com) and connect your GitHub account.
+2. **Deploy the Repo**: Import this repository into Vercel. It will auto-detect the API functions.
+3. **Set Environment Variables** in Vercel dashboard:
+   - `GITHUB_OWNER`: Your GitHub username (e.g., BenLewis42)
+   - `GITHUB_REPO`: Your repo name (e.g., BenLewis42.github.io)
+   - `GITHUB_BRANCH`: main (or your branch)
+   - `GITHUB_TOKEN`: Your GitHub PAT with `repo` permissions
+   - `RECAPTCHA_SECRET_KEY`: From Google reCAPTCHA (get from [recaptcha.google.com](https://recaptcha.google.com))
+4. **Update submit.html**: Replace `YOUR_RECAPTCHA_SITE_KEY` with your reCAPTCHA site key.
+5. **Redeploy**: Push changes to trigger a Vercel redeploy.
+
+Users can now submit posts via `submit.html`, and they'll be published automatically after reCAPTCHA verification.
+
 If you want me to enable automatic cleanup (delete `posts/`, `images/`, `Gifs/`) here, confirm and I will proceed.
