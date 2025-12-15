@@ -12,9 +12,7 @@
     <h1>Submit a Post</h1>
     <p>Fill out the form below. Your post will be published automatically after submission.</p>
 
-    <form id="submitForm" action="/api/submit" method="POST">
-      <label>Name: <input type="text" name="name" required></label>
-      <label>Email: <input type="email" name="email" required></label>
+    <form id="submitForm" action="/api/submit" method="POST" enctype="multipart/form-data">
       <label>Post Title: <input type="text" name="title" required></label>
       <label>Content (Markdown): <textarea name="content" rows="8" required></textarea></label>
       <label>Images: <input type="file" name="images" multiple accept="image/*"></label>

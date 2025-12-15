@@ -5,7 +5,7 @@ const upload = multer({ dest: '/tmp/' });
 export default upload.fields([{ name: 'images', maxCount: 10 }])(async (req, res) => {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed');
 
-  const { name, email, title, content, 'g-recaptcha-response': recaptcha } = req.body;
+  const { title, content, 'g-recaptcha-response': recaptcha } = req.body;
 
   // Verify reCAPTCHA
   const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
@@ -22,7 +22,7 @@ export default upload.fields([{ name: 'images', maxCount: 10 }])(async (req, res
   const date = new Date().toISOString().slice(0, 10);
   const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
   const filename = `${date}-${slug}.md`;
-  const frontMatter = `---\ntitle: "${title.replace(/"/g, '\\"')}"\ndate: ${date} 00:00:00 -0000\nauthor: ${name}\nemail: ${email}\n---\n\n`;
+  const frontMatter = `---\ntitle: "${title.replace(/"/g, '\\"')}"\ndate: ${date} 00:00:00 -0000\n---\n\n`;
   const fileContent = frontMatter + content;
   const fileBase64 = Buffer.from(fileContent).toString('base64');
 

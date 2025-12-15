@@ -15,11 +15,12 @@ document.getElementById('saveDraft').addEventListener('click', ()=>{
 });
 
 document.getElementById('publish').addEventListener('click', async ()=>{
-  const owner = document.getElementById('owner').value.trim();
-  const repo = document.getElementById('repo').value.trim();
-  const branch = document.getElementById('branch').value.trim() || 'main';
+  const cfg = await (await fetch('config.json')).json();
+  const owner = cfg.owner;
+  const repo = cfg.repo;
+  const branch = cfg.branch || 'main';
   const token = document.getElementById('token').value.trim();
-  if(!owner||!repo||!token){ setStatus('Owner, repo and token are required.', true); return; }
+  if(!token){ setStatus('Token is required.', true); return; }
 
   const titleVal = document.getElementById('title').value.trim();
   const dateVal = document.getElementById('date').value || new Date().toISOString().slice(0,10);
