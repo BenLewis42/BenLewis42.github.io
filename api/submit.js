@@ -1,8 +1,4 @@
-const fetch = require('node-fetch');
-const multer = require('multer'); 
-const upload = multer({ dest: '/tmp/' });
-
-export default upload.fields([{ name: 'images', maxCount: 10 }])(async (req, res) => {
+export default async (req, res) => {
   if (req.method !== 'POST') return res.status(405).send('Method not allowed');
 
   const { title, content, 'g-recaptcha-response': recaptcha } = req.body;
@@ -34,19 +30,5 @@ export default upload.fields([{ name: 'images', maxCount: 10 }])(async (req, res
   });
   if (!postRes.ok) return res.status(500).send('Failed to create post');
 
-  // Handle images
-  const images = req.files?.images || [];
-  for (const img of images) {
-    const fs = require('fs');
-    const imgData = fs.readFileSync(img.path);
-    const imgBase64 = imgData.toString('base64');
-    const imgPath = `images/${img.originalname}`;
-    await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${imgPath}`, {
-      method: 'PUT',
-      headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: `Add image: ${img.originalname}`, content: imgBase64, branch })
-    });
-  }
-
   res.status(200).send('Post submitted and published successfully!');
-});
+};
