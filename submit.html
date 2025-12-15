@@ -27,8 +27,16 @@
       e.preventDefault();
       const token = await grecaptcha.execute('6LcphiwsAAAAACGlnm1L-tmlPNRZQ3EEkINbAB1P', { action: 'submit' });
       const formData = new FormData(e.target);
-      formData.append('g-recaptcha-response', token);
-      const response = await fetch('/api/submit', { method: 'POST', body: formData });
+      const data = {
+        title: formData.get('title'),
+        content: formData.get('content'),
+        'g-recaptcha-response': token
+      };
+      const response = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
       const result = await response.text();
       document.getElementById('status').innerText = result;
     });
