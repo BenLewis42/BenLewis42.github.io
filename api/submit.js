@@ -1,5 +1,5 @@
 const fetch = require('node-fetch');
-const multer = require('multer');
+const multer = require('multer'); 
 const upload = multer({ dest: '/tmp/' });
 
 export default upload.fields([{ name: 'images', maxCount: 10 }])(async (req, res) => {
@@ -11,7 +11,7 @@ export default upload.fields([{ name: 'images', maxCount: 10 }])(async (req, res
   const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
   const recaptchaRes = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${recaptcha}`);
   const recaptchaData = await recaptchaRes.json();
-  if (!recaptchaData.success) return res.status(400).send('reCAPTCHA verification failed');
+  if (!recaptchaData.success || recaptchaData.score < 0.5) return res.status(400).send('reCAPTCHA verification failed');
 
   // GitHub details from env
   const owner = process.env.GITHUB_OWNER;
