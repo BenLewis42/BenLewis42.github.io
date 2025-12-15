@@ -6,8 +6,9 @@ export default async (req, res) => {
   // Verify reCAPTCHA
   const recaptchaSecret = process.env.RECAPTCHA_SECRET_KEY;
   const recaptchaRes = await fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecret}&response=${recaptcha}`);
+  if (!recaptchaRes.ok) return res.status(500).send('reCAPTCHA verification request failed');
   const recaptchaData = await recaptchaRes.json();
-  if (!recaptchaData.success || recaptchaData.score < 0.5) return res.status(400).send('reCAPTCHA verification failed');
+  if (!recaptchaData.success || recaptchaData.score < 0.5) return res.status(400).send(`reCAPTCHA failed: success=${recaptchaData.success}, score=${recaptchaData.score}`);
 
   // GitHub details from env
   const owner = process.env.GITHUB_OWNER;
